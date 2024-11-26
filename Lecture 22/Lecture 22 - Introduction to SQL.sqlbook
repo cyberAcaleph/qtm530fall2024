@@ -33,7 +33,7 @@ panel on the left:
 
 Delete existing table
 -- SQLBook: Code
--- Active: 1710903290079@@127.0.0.1@5432@postgres
+-- Active: 1732029647087@@127.0.0.1@5432@jiangshuyue
 -- If the table already exists we can drop it:
 -- If it doesn't exist nothing happens
 -- System commands are in upper case and user defined
@@ -82,6 +82,7 @@ View the table in the VSC "Database" Panel
 $\qquad$ <img src="figures/view_table_sql.png" alt="drawing" width="350"/>
 
 -- SQLBook: Code
+-- Active: 1732029647087@@127.0.0.1@5432@jiangshuyue
 -- In SQL, a set of tables is called a "Schema"
 -- Click "refresh" to see changes
 -- The pencil button edits column attributes
@@ -101,11 +102,13 @@ INSERT INTO drivers VALUES (6, 'Neo','American',500);
 
 INSERT INTO drivers VALUES (4, 'Thor','Asgard',1000);
 
-
 INSERT INTO drivers VALUES (4, 'Alejandro','Colombia',5000);
+-- SQLBook: Code
+INSERT INTO drivers VALUES (8, 'abc','fgsd',500);
 
+INSERT INTO drivers VALUES (9, 'dsf','dfg',1000);
 
-
+INSERT INTO drivers VALUES (10, 'sdfghj','dxfcgvh',5000);
 -- SQLBook: Markup
 # <span style="color:darkblue"> II. Dataset Operations </span>
 
@@ -258,6 +261,15 @@ Try it yourself!
  of victories is at most 71
 
 -- SQLBook: Code
+SELECT nationality,
+       SUM(victories) AS sum_victories,
+       AVG(victories) AS mean_victories,
+       MIN(victories) AS min_victories,
+       MAX(victories) AS max_victories
+FROM drivers
+GROUP BY nationality
+HAVING MAX(victories) > 71;
+-- SQLBook: Code
 # Write your own code
 
 SELECT nationality, MAX(victories) AS max_victories FROM drivers
@@ -293,11 +305,16 @@ Left-join data
 - ``` LEFT JOIN``` is followed by the secondary dataset
 
 -- SQLBook: Code
--- Active: 1710903290079@@127.0.0.1@5432@postgres
+-- Active: 1732029647087@@127.0.0.1@5432@jiangshuyue
 
 SELECT * 
 FROM drivers
 LEFT JOIN countries
+ON drivers.nationality = countries.nationality
+-- SQLBook: Code
+SELECT * 
+FROM drivers
+INNER JOIN countries
 ON drivers.nationality = countries.nationality
 -- SQLBook: Markup
 # <span style="color:darkblue"> V. Learning more </span>
